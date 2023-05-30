@@ -5,10 +5,7 @@ import {
   RuntimeContext,
 } from "@gitbook/runtime";
 
-import {
-  extractSupademoDemoFromURL,
-  fetchSupademoOEmbedData,
-} from "./supademo";
+import { extractSupademoDemoFromURL } from "./supademo";
 
 interface SupademoInstallationConfiguration {}
 
@@ -69,15 +66,13 @@ const embedBlock = createComponent<{
       );
     }
 
-    const embedData = await fetchSupademoOEmbedData(demoId);
-    const aspectRatio = embedData.width / embedData.height;
     return (
       <block>
         <webframe
           source={{
             url: `https://app.supademo.com/embed/${demoId}`,
           }}
-          aspectRatio={aspectRatio}
+          aspectRatio={1}
         />
       </block>
     );
