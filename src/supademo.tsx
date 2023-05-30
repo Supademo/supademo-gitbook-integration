@@ -6,26 +6,6 @@ export interface SupademoOEmbed {
 }
 
 /**
- * Fetch the Supademo oembed data.
- */
-export async function fetchSupademoOEmbedData(
-  demoId: string
-): Promise<SupademoOEmbed> {
-  const url = new URL(`https://app.supademo.com/api/oembed`);
-  url.searchParams.append("url", `https://app.supademo.com/embed/${demoId}`);
-
-  const response = await fetch(url.toString());
-
-  if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}`);
-  }
-
-  const result = await response.json<SupademoOEmbed>();
-
-  return result;
-}
-
-/**
  * Extract the Supademo demo ID from the embed URL.
  */
 export function extractSupademoDemoFromURL(input: string): {
