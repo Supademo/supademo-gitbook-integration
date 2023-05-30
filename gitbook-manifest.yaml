@@ -18,7 +18,7 @@ summary: |
   # Configure
 
   To install on a single space navigate to integrations in sub-navigation. If you prefer to install the Supademo integration on multiple or all spaces, navigate to your organization settings and enable it from the integrations panel. This will give you access to the custom Supademo block.
-visibility: unlisted
+visibility: public
 description: Enhance your documentation by embedding interactive product demos.
 script: src/index.tsx
 scopes: []
