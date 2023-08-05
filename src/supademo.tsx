@@ -17,9 +17,9 @@ export function extractSupademoDemoFromURL(input: string): {
   }
 
   const parts = url.pathname.split("/");
-  if (!["demo"].includes(parts[1])) {
-    return;
+  if (parts[1] === "demo" || parts[1] === "showcase") {
+    return { demoId: parts[2] };
   }
 
-  return { demoId: parts[2] };
+  return;
 }

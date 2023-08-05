@@ -66,11 +66,20 @@ const embedBlock = createComponent<{
       );
     }
 
+    let embedUrl = url;
+
+    // Modify the embed URL to include the "embed" path segment
+    if (url.includes("/demo/")) {
+      embedUrl = url.replace("/demo/", "/embed/");
+    } else if (url.includes("/showcase/")) {
+      embedUrl = url.replace("/showcase/", "/showcase/embed/");
+    }
+
     return (
       <block>
         <webframe
           source={{
-            url: `https://app.supademo.com/embed/${demoId}`,
+            url: embedUrl,
           }}
           aspectRatio={1}
         />

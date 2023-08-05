@@ -29,3 +29,5 @@ blocks:
     urlUnfurl:
       - https://app.supademo.com/demo/**
       - https://app.supademo.com/embed/**
+      - https://app.supademo.com/showcase/**
+      - https://app.supademo.com/showcase/embed/**
