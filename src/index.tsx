@@ -5,7 +5,10 @@ import {
   RuntimeContext,
 } from "@gitbook/runtime";
 
-import { extractSupademoDemoFromURL } from "./supademo";
+import {
+  extractSupademoDemoFromURL,
+  fetchSupademoOEmbedData,
+} from "./supademo";
 
 interface SupademoInstallationConfiguration {}
 
@@ -67,13 +70,22 @@ const embedBlock = createComponent<{
     }
 
     let embedUrl = url;
+    let embedData;
 
     // Modify the embed URL to include the "embed" path segment
-    if (url.includes("/demo/")) {
-      embedUrl = url.replace("/demo/", "/embed/");
-    } else if (url.includes("/showcase/")) {
-      embedUrl = url.replace("/showcase/", "/showcase/embed/");
+    if (url.includes("demo") && !url.includes("showcase")) {
+      if (!url.includes("embed")) {
+        embedUrl = url.replace("/demo/", "/embed/");
+      }
+      embedData = await fetchSupademoOEmbedData(demoId, "demo");
+    } else if (url.includes("showcase")) {
+      if (!url.includes("embed")) {
+        embedUrl = url.replace("/showcase/", "/showcase/embed/");
+      }
+      embedData = await fetchSupademoOEmbedData(demoId, "showcase");
     }
+
+    const aspectRatio = embedData.width / embedData.height;
 
     return (
       <block>
@@ -81,7 +93,7 @@ const embedBlock = createComponent<{
           source={{
             url: embedUrl,
           }}
-          aspectRatio={1}
+          aspectRatio={aspectRatio}
         />
       </block>
     );
